@@ -6,6 +6,9 @@ file=$1
 # hg002 merged H1L bed file path
 hg002_merged_H1L=$2
 
+# output prefix
+prefix=$3
+
 # percentage of windows to keep as CDRs
 percent=10
 transition_percent=20
@@ -20,7 +23,6 @@ mkdir -p "strict_cdrs"
 mkdir -p "transition_cdrs"
 
 # declare variables
-prefix=$(basename -- "${file%.bed}")
 window_bed="windows_tmp/${prefix}.windows1000.bed"
 window_bed_2="windows_tmp/${prefix}.windows1000.filter.bed"
 window_mean="1kbwindow_means/${prefix}.windows1000.mean.bed"
@@ -133,5 +135,8 @@ while true; do
 	fi
 
 done
+
+echo "Wrote CDRs to: ${strict_cdrs}"
+echo "Wrote Transitions to: ${transitions}"
 
 echo "Done!"
