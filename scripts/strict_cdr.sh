@@ -13,6 +13,11 @@ hg002_merged_H1L=$3
 # output prefix
 prefix=$4
 
+echo $percent
+echo $file
+echo $hg002_merged_H1L
+echo $prefix
+
 # minimum length of a CDR
 min_length=4500
 
