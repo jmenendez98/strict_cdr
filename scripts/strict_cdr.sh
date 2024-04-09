@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eux -o pipefail
+
 # percentage of windows to keep as CDRs
 percent=$1
 transition_percent=$(( percent + 10 ))
