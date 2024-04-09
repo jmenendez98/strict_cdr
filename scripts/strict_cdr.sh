@@ -1,17 +1,17 @@
 #!/bin/bash
 
 # input folder should contain ONLY methylBed files as generated using the settings specified in the README
-file=$1
+file=$2
 
 # hg002 merged H1L bed file path
-hg002_merged_H1L=$2
+hg002_merged_H1L=$3
 
 # output prefix
-prefix=$3
+prefix=$4
 
 # percentage of windows to keep as CDRs
-percent=10
-transition_percent=20
+percent=$1
+transition_percent=$(( percent + 10 ))
 # minimum length of a CDR
 min_length=4500
 
