@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# percentage of windows to keep as CDRs
+percent=$1
+transition_percent=$(( percent + 10 ))
+
 # input folder should contain ONLY methylBed files as generated using the settings specified in the README
 file=$2
 
@@ -9,9 +13,6 @@ hg002_merged_H1L=$3
 # output prefix
 prefix=$4
 
-# percentage of windows to keep as CDRs
-percent=$1
-transition_percent=$(( percent + 10 ))
 # minimum length of a CDR
 min_length=4500
 
