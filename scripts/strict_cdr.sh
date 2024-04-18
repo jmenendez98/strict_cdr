@@ -15,11 +15,6 @@ hg002_merged_H1L=$3
 # output prefix
 prefix=$(basename "$4")
 
-echo $percent
-echo $file
-echo $hg002_merged_H1L
-echo $prefix
-
 # minimum length of a CDR
 min_length=4500
 
@@ -35,7 +30,7 @@ window_mean="windows/${prefix}.windows1000.mean.bed"
 transitions="${prefix}.strictTransitions.bed"
 strict_cdrs="${prefix}.strictCDR.bed"
 
-echo "PREFIX: " $prefix
+# echo "PREFIX: " $prefix
 
 # 1
 awk 'BEGIN { min = "unset"; max = 0 }
@@ -53,7 +48,7 @@ END {
 	}
 }' $file > $window_bed
 
-echo $(head $window_bed)
+#echo $(head $window_bed)
 
 # 2 + 3
 bedtools intersect -a $window_bed -b $hg002_merged_H1L | \
@@ -62,7 +57,7 @@ bedtools intersect -a $window_bed -b $hg002_merged_H1L | \
 	awk -F'\t' '$4 != "." {print}' - | \
 	sort -k 1,1 -k2,2n - > $window_mean
 
-echo $(head $window_mean)
+#echo $(head $window_mean)
 
 # Reset current thresholds for each file! 
 current_percent=$percent
@@ -75,8 +70,8 @@ cdr_threshold=$(awk '{print $4}' $window_mean | sort -n | \
 cdr_transition_threshold=$(awk '{print $4}' $window_mean | sort -n | \
 	awk -v perc=$current_transition_percent 'BEGIN{line=-1} {all[NR]=$1} END{line=int((perc/100.0)*NR); if(line<1)line=1; print all[line]}')
 
-echo "CDR Mod Percent Threshold: ${cdr_threshold}"
-echo "Transition Mod Percent Threshold: ${cdr_transition_threshold}"
+#echo "CDR Mod Percent Threshold: ${cdr_threshold}"
+#echo "Transition Mod Percent Threshold: ${cdr_transition_threshold}"
 
 # Reset min_length for each file
 current_min_length=$min_length
