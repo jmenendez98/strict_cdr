@@ -79,9 +79,9 @@ current_min_length=$min_length
 # 5
 awk -v thresh=$cdr_threshold '$4 < thresh' $window_mean | \
 	bedtools merge -d 3 -i - | \
-	awk -v min=$current_min_length -F'\t' 'BEGIN {FS="\t"; OFS="\t"} {if ($3-$2 > min) {print $1,$2,$3}}' - | \
 	bedtools intersect -a - -b $hg002_merged_H1L -f 1.0 | \
 	awk -v min=$current_min_length -F'\t' 'BEGIN {FS="\t"; OFS="\t"} {if ($3-$2 > min) {print $1,$2,$3}}' - | \
+	bedtools merge -d 1500 -i - | \
 	sort -k 1,1 -k2,2n -o $strict_cdrs
 
 awk -v thresh=$cdr_transition_threshold '$4 < thresh' $window_mean | \
