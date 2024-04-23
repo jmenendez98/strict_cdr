@@ -1,25 +1,22 @@
 #!/bin/bash
 
-set -eux -o pipefail
-
-# percentage of windows to keep as CDRs
-percent=$1
-transition_percent=$(( percent + 10 ))
-
 # pileup bed
-file=$2
+file=$1
 
 # hg002 merged H1L bed file path
-hg002_merged_H1L=$3
+hg002_merged_H1L=$2
 
 # output prefix
-prefix=$(basename "$4")
+prefix=$(basename "$3")
+
+# percentage of windows to keep as CDRs
+percent=$4
+transition_percent=$5
 
 # minimum length of a CDR
 min_length=4500
 
 # make output folders
-
 mkdir -p "windows"
 mkdir -p "temps"
 
@@ -93,5 +90,3 @@ awk -v thresh=$cdr_transition_threshold '$4 < thresh' $window_mean | \
 
 echo "Wrote CDRs to: ${strict_cdrs}"
 echo "Wrote Transitions to: ${transitions}"
-
-echo "Done!"
