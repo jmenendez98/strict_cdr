@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eux -o pipefail
+
 # pileup bed
 file=$1
 
