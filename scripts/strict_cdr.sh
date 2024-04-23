@@ -40,8 +40,8 @@ done
 
 # Check if required options are provided
 if [[ -z "$file" || -z "$hg002_merged_H1L" || -z "$prefix" || -z "$percent" || -z "$transition_percent" ]]; then
-  echo "Missing required arguments"
-  exit 1
+	echo "Missing required arguments"
+	exit 1
 fi
 
 # Print parsed arguments (optional)
