@@ -1,5 +1,5 @@
 # Rough CDR Estimation Scripts:
-Intended to be used as the priors for a Hidden Markov Model to identify CDRs(hypomethylation in the alpha-sat array).
+Intended to be used as the priors for a [Hidden Markov Model](https://github.com/jmenendez98/hmm_cdr) to identify CDRs(hypomethylation in the alpha-sat array).
 
 ## Recommended Environments:
 Both tools require the use of **bedtools**. This can be installed using conda or using a docker container which contains this code as well as other code for CDR detection.
