@@ -6,8 +6,14 @@ set -eux -o pipefail
 file=""
 hg002_merged_H1L=""
 prefix=""
-percent=""
-transition_percent=""
+percent="10"
+transition_percent="20"
+
+# Check if the correct number of arguments are provided
+if [ "$#" -lt 1 ]; then
+    echo "Error: Missing required arguments. Use -h for help."
+    exit 1
+fi
 
 # Parse command-line options
 while getopts ":i:r:o:p:t:" opt; do
@@ -27,19 +33,26 @@ while getopts ":i:r:o:p:t:" opt; do
 		t )
 			transition_percent="$OPTARG"
 			;;
+		h )
+            echo "Usage: strict_cdr.sh -i <input_file> -r <hg002_merged_H1L_file> -o <output_prefix> -p <percentage> -t <transition_percentage>"
+            echo "Options:"
+            echo "  -i, --input: Required. The input file containing the CDRs and transitions."
+            echo "  -r, --hg002_merged_H1L: Required. The file containing the merged H1L (Human-Mouse Homolog) regions."
+            echo "  -o, --output_prefix: Required. A prefix for the output files. The output files will be named as <output_prefix>.strictCDR.bed and <output_prefix>.strictTransitions.bed."
+            echo "  -p, --percentage: Optional. The percentage threshold for the CDRs. Default is 10."
+            echo "  -t, --transition_percentage: Optional. The transition percentage threshold. Default is 20."
+            exit 0
+            ;;
 		\? )
 			echo "Invalid option: $OPTARG" 1>&2
-			exit 1
-			;;
-		: )
-			echo "Invalid option: $OPTARG requires an argument" 1>&2
+			echo "Use -h for help."
 			exit 1
 			;;
 	esac
 done
 
 # Check if required options are provided
-if [[ -z "$file" || -z "$hg002_merged_H1L" || -z "$prefix" || -z "$percent" || -z "$transition_percent" ]]; then
+if [[ -z "$file" || -z "$hg002_merged_H1L" || -z "$prefix" ]]; then
 	echo "Missing required arguments"
 	exit 1
 fi
@@ -47,7 +60,7 @@ fi
 # Print parsed arguments (optional)
 echo "file: $file"
 echo "hg002_merged_H1L: $hg002_merged_H1L"
-echo "prefix: $prefix"
+echo "output_prefix: $prefix"
 echo "percent: $percent"
 echo "transition_percent: $transition_percent"
 
