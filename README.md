@@ -39,5 +39,5 @@ Options:
 > -l, --low_percentage: Optional. The starting percentile for scoring windows. Default is 1.  
 > -h, --high_percentage: Optional. The ending percentile for scoring windows. Default is 20.  
 
-Output:
+Output:  
 The script will generate a scoring bed file named `<output_prefix>.strictScores.bed.`
