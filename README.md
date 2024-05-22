@@ -44,3 +44,7 @@ Options:
 
 Output:  
 The script will generate a scoring bed file named `<output_prefix>.strictScores.bed.`
+
+
+# Contributors
+Thank you Mira Mastoras for starting this automated CDR Detection work! [CDR_detect](https://github.com/miramastoras/CDR_detect/tree/main)
